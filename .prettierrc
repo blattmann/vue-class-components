@@ -1,0 +1,8 @@
+{
+  "semi": false,
+  "prettier": { "arrowParens": "always" },
+  "singleQuote": true,
+  "preferVoidTags": true,
+  "endOfLine":"auto",
+  "failOnError": false
+}
