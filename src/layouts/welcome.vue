@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container fluid fill-height>
+    <v-container fluid>
       <v-fade-transition mode="out-in">
         <nuxt />
       </v-fade-transition>

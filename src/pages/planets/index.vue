@@ -6,7 +6,7 @@
     </template>
 
     <template v-else>
-      <h1>SWAPI - The Stars Wars API</h1>
+      <h1>Planets</h1>
     </template>
   </div>
 </template>
@@ -59,3 +59,7 @@ export default class TvIndex extends mixins(TvLoading) {
   }
 }
 </script>
+
+<style>
+/* styles */
+</style>

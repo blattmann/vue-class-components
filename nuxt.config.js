@@ -6,14 +6,23 @@ export default {
   srcDir: 'src/',
   ssr: false,
   /*
+   ** Axios module configuration
+   ** See https://axios.nuxtjs.org/options
+   */
+  axios: {
+    proxy: true // Can be also an object with default options
+  },
+  // proxy: {
+  //   '/api/': 'https://swapi.dev/'
+  // },
+  /*
    ** Headers of the page
    */
   head: {
     htmlAttrs: {
       lang: 'en-us'
     },
-    title:
-      'TrustVisitor Self Check-In - CertiPath’s Visitor Management Solution',
+    title: 'Vue Class Component Dummy',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -125,8 +134,8 @@ export default {
         'postcss-clean': {},
         'postcss-preset-env': { stage: 1 },
         'postcss-flexbugs-fixes': {},
-        autoprefixer: {},
-        cssnano: {}
+        "autoprefixer": {},
+        "cssnano": {}
       },
       order: [
         'postcss-custom-media',
