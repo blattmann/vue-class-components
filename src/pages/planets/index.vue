@@ -15,6 +15,9 @@
 // Core
 import Component, { mixins } from 'vue-class-component'
 
+// Vuex
+import { State } from 'vuex-class'
+
 // Mixins
 import TvLoading from '@/mixins/loading'
 
@@ -23,9 +26,9 @@ import TvNavigation from '@/components/navigation/Navigation'
 import TvSpinner from '@/components/spinner/Spinner'
 
 /**
- *  TvIndex
+ *  TvPlanets
  *
- *  @desc - SWAPI Main Page
+ *  @desc - SWAPI Planets Page
  *
  *  @author Front End Dev @Certipath
  *
@@ -38,9 +41,16 @@ import TvSpinner from '@/components/spinner/Spinner'
     TvSpinner
   }
 })
-export default class TvIndex extends mixins(TvLoading) {
+export default class TvPlanets extends mixins(TvLoading) {
   // Component data
   timeout = null
+
+  @State('people', { namespace: 'peopleState' })
+  people
+
+  created() {
+    console.log('state people: ', this.people)
+  }
 
   mounted() {
     this.setTimeOutClose()
@@ -60,6 +70,6 @@ export default class TvIndex extends mixins(TvLoading) {
 }
 </script>
 
-<style>
+<style lang="postcss">
 /* styles */
 </style>

@@ -9,10 +9,6 @@ const navigationArray = [
   {
     title: 'People',
     url: '/people'
-  },
-  {
-    title: 'Planets',
-    url: '/planets'
   }
 ]
 
@@ -31,18 +27,24 @@ const navigationArray = [
 export default class NavigationModule extends VuexModule {
   @Mutation
   init(data) {
-    this.Navi = data
+    this.navi = data
   }
 
   @Mutation
   setActivePage(data) {
-    this.Navi.ActivePage = data
+    this.navi.ActivePage = data
+  }
+
+  @Mutation
+  setBackLink(data) {
+    this.navi.BackLink = data
   }
 
   navigationInitialState = {
     ActivePage: '',
-    Navigation: navigationArray
+    Navigation: navigationArray,
+    BackLink: false
   }
 
-  Navi = { ...this.navigationInitialState }
+  navi = { ...this.navigationInitialState }
 }

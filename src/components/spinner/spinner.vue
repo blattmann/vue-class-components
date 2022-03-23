@@ -32,12 +32,14 @@ export default class TvSpinner extends Vue {
 
 <style lang="postcss">
 :root {
-  --speed-show: 0ms;
-  --speed-animation: 500ms;
+  --spinner-speed-show: 0ms;
+  --spinner-speed-animation: 500ms;
+  --spinner-border-radius: 50%;
+  --spinner-background-color: rgba(255, 255, 255, 1);
 }
 
 .tv-spinner {
-  background: white;
+  background: var(--spinner-background-color);
   visibility: hidden;
   opacity: 0;
   position: absolute;
@@ -49,35 +51,33 @@ export default class TvSpinner extends Vue {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  animation: nuxtLoadingIn var(--speed-show) ease;
+  animation: nuxtLoadingIn var(--spinner-speed-show) ease;
   animation-fill-mode: forwards;
   overflow: hidden;
-}
 
-.tv-spinner > div,
-.tv-spinner > div:after {
-  border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
-}
+  & > div {
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border: 0.5rem solid #f5f5f5;
+    border-left: 0.5rem solid #fff;
+    transform: translateZ(0);
+    animation: nuxtLoading var(--spinner-speed-animation) infinite linear;
+  }
 
-.tv-spinner > div {
-  font-size: 10px;
-  position: relative;
-  text-indent: -9999em;
-  border: 0.5rem solid #f5f5f5;
-  border-left: 0.5rem solid #fff;
-  transform: translateZ(0);
-  animation: nuxtLoading var(--speed-animation) infinite linear;
+  & > div,
+  & > div:after {
+    border-radius: var(--spinner-border-radius);
+    width: 5rem;
+    height: 5rem;
+  }
 }
 
 @keyframes nuxtLoading {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }

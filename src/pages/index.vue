@@ -1,14 +1,48 @@
 <template>
-  <div>
-    <tv-navigation />
-    <template v-if="loading">
-      <tv-spinner />
-    </template>
-
-    <template v-else>
-      <h1>SWAPI - The Stars Wars API</h1>
-    </template>
-  </div>
+  <v-container class="text-left">
+    <v-row class="fill-height" align="center" justify="left">
+      <v-col cols="12" class="pa-0">
+        <v-card>
+          <v-card-title class="text-h6">
+            <v-row
+              class="tv-home__wrapper fill-height flex-column"
+              justify="space-between"
+            >
+              <h1>SWAPI - The Stars Wars API</h1>
+            </v-row>
+          </v-card-title>
+          <v-card-text>
+            <v-row
+              class="tv-home__wrapper fill-height flex-column"
+              justify="space-between"
+            >
+              <div class="tv-home__content">
+                <h2 class="text-h3 pb-6">What is this?</h2>
+                <p>
+                  The Star Wars API is the world's first quantified and
+                  programmatically-formatted set of Star Wars data.
+                </p>
+                <p>
+                  After hours of watching films and trawling through content
+                  online, we present to you all the People, Films, Species,
+                  Starships, Vehicles and Planets from Star Wars.
+                </p>
+                <p>
+                  We've formatted this data in JSON and exposed it to you in a
+                  RESTish implementation that allows you to programmatically
+                  collect and measure the data.
+                </p>
+                <p>
+                  Check out the documentation to get started consuming swapi
+                  data
+                </p>
+              </div>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -16,11 +50,7 @@
 import Component, { mixins } from 'vue-class-component'
 
 // Mixins
-import TvLoading from '@/mixins/loading'
-
-// Component imports
-import TvNavigation from '@/components/navigation/Navigation'
-import TvSpinner from '@/components/spinner/Spinner'
+import TvNavigationHelper from '@/mixins/navigationHelper'
 
 /**
  *  TvIndex
@@ -32,30 +62,30 @@ import TvSpinner from '@/components/spinner/Spinner'
  *  Mon Mar 7 09:00:00 MST 2022
  */
 @Component({
-  layout: 'default',
-  components: {
-    TvNavigation,
-    TvSpinner
-  }
+  layout: 'default'
 })
-export default class TvIndex extends mixins(TvLoading) {
-  // Component data
-  timeout = null
+export default class TvIndex extends mixins(TvNavigationHelper) {}
+</script>
 
-  mounted() {
-    this.setTimeOutClose()
+<style lang="postcss">
+:root {
+  --background-color: rgba(255, 255, 255, 1);
+  --border-radius: 4px;
+  --text-color-default: #000;
+  --text-size-content: 1.2rem;
+}
+
+.tv-home {
+  &__wrapper {
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
   }
 
-  beforeDestroy() {
-    clearTimeout(this.timeout)
-  }
-
-  // Component method
-  setTimeOutClose() {
-    this.timeout = setTimeout(() => {
-      // Handle loading
-      this.$store.commit('appState/setloading', false)
-    }, 500)
+  &__content {
+    min-height: 300px;
+    color: var(--text-color-default);
+    font-size: var(--text-size-content);
   }
 }
-</script>
+</style>

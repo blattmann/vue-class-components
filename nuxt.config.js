@@ -51,7 +51,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/axios'],
+  plugins: ['~/plugins/axios', '~/plugins/api.js', '~/plugins/utilities.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -134,8 +134,8 @@ export default {
         'postcss-clean': {},
         'postcss-preset-env': { stage: 1 },
         'postcss-flexbugs-fixes': {},
-        "autoprefixer": {},
-        "cssnano": {}
+        autoprefixer: {},
+        cssnano: {}
       },
       order: [
         'postcss-custom-media',
