@@ -14,22 +14,53 @@ import { Module, Mutation, VuexModule } from 'vuex-module-decorators'
   name: 'planetsState'
 })
 export default class PlanetsModule extends VuexModule {
-  @Mutation
-  init(data) {
-    this.planets = data
-  }
+  // ============================================
+  // planets
 
-  @Mutation
-  reset() {
-    this.planets = { ...this.planetsInitialState }
-  }
-
+  /*
+   * @name - setPeople
+   * @descrition - Set initial planets state
+   */
   @Mutation
   setPlanets(data) {
     this.planets = data
   }
 
+  // ============================================
+  // planet
+
+  /*
+   * @name - setPlanet
+   * @descrition - Set current planet
+   */
+  @Mutation
+  setPlanet(planet) {
+    this.selectedPlanetState = planet
+  }
+
+  /*
+   * @name - clearPlanet
+   * @descrition - Clear planet
+   */
+  @Mutation
+  clearPlanet() {
+    this.selectedPlanetState = {}
+  }
+
+  // ============================================
+  // states
+
+  /*
+   * @name - planetsInitialState
+   * @descrition - Initial state of the planets object
+   */
   planetsInitialState = {}
+
+  /*
+   * @name - selectedPlanetState
+   * @descrition - State of the currently selected planet
+   */
+  selectedPlanetState = {}
 
   planets = { ...this.planetsInitialState }
 }

@@ -47,7 +47,10 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    // CSS file in the project
+    '@/assets/css/styles.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
@@ -125,17 +128,26 @@ export default {
         'postcss-import': {},
         'postcss-apply': {},
         'postcss-functions': {},
-        'postcss-custom-properties': {
-          preserve: false
-        },
+        // imports seem not to work :(
+        // 'postcss-custom-properties': {
+        //   importFrom: [
+        //     './src/assets/css/vars.css',
+        //     './src/assets/css/mediaqueries.css'
+        //   ],
+        //   preserve: false
+        // },
+        // 'postcss-mixins': {
+        //   importFrom: ['./src/assets/css/mediaqueries.css']
+        // },
+        'postcss-custom-properties': {},
         'postcss-mixins': {},
         'postcss-nested': {},
         'postcss-discard-comments': {},
         'postcss-clean': {},
         'postcss-preset-env': { stage: 1 },
         'postcss-flexbugs-fixes': {},
-        autoprefixer: {},
-        cssnano: {}
+        "autoprefixer": {},
+        "cssnano": {}
       },
       order: [
         'postcss-custom-media',
@@ -144,8 +156,8 @@ export default {
         'postcss-apply',
         'postcss-functions',
         'postcss-custom-properties',
-        'postcss-mixins',
         'postcss-nested',
+        'postcss-mixins',
         'postcss-discard-comments',
         'postcss-clean',
         'postcss-preset-env',

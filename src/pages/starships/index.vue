@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h1>Planets</h1>
-    <v-container class="tv-planets text-center">
+    <h1>Starships</h1>
+    <v-container class="tv-starships text-center">
       <v-row class="fill-height" align="center">
-        <template v-for="item in planets">
+        <template v-for="item in starships">
           <v-col :key="item.name" cols="12" md="6" class="pa-0 pb-6 pa-md-6">
             <v-hover v-slot="{ hover }">
               <v-card
                 :elevation="hover ? 12 : 2"
-                :class="['tv-planets__card', { 'on-hover': hover }]"
+                :class="['tv-starships__card', { 'on-hover': hover }]"
               >
                 <v-card-title class="text-h6">
                   <v-row
@@ -27,18 +27,26 @@
                           <p
                             class="ml-3 text-body-1 font-weight-bold text-left"
                           >
-                            Climate: {{ item.climate }}
+                            Model: {{ item.model }}
                           </p>
                           <p
                             class="ml-3 text-body-1 font-weight-bold text-left"
                           >
-                            Terrain: {{ item.terrain }}
+                            Manufacturer: {{ item.manufacturer }}
+                          </p>
+                          <p
+                            class="ml-3 text-body-1 font-weight-bold text-left"
+                          >
+                            Speed: {{ item.max_atmosphering_speed }} km/h [{{
+                              $convertSpeed(item.max_atmosphering_speed)
+                            }}
+                            mph]
                           </p>
                           <p
                             class="ml-3 text-body-1 font-weight-bold text-left"
                           >
                             <nuxt-link
-                              :to="`planets/${encodeURIComponent(item.name)}`"
+                              :to="`starships/${encodeURIComponent(item.name)}`"
                             >
                               Details
                             </nuxt-link>
@@ -60,7 +68,7 @@
 <script>
 // Core
 import Component, { mixins } from 'vue-class-component'
-
+// import { Watch } from 'vue-property-decorator'
 import { isEmpty } from 'lodash'
 
 // Vuex
@@ -75,9 +83,9 @@ import getDataMixin from '@/mixins/getDataMixin'
 import TvSpinner from '@/components/spinner/Spinner'
 
 /**
- *  TvPlanets
+ *  TvStarships
  *
- *  @desc - SWAPI Planets Page
+ *  @desc - SWAPI Starships Page
  *
  *  @author Front End Dev @Certipath
  *
@@ -89,16 +97,17 @@ import TvSpinner from '@/components/spinner/Spinner'
     TvSpinner
   }
 })
-export default class TvPlanets extends mixins(
+export default class TvStarships extends mixins(
   TvLoading,
   TvNavigationHelper,
   getDataMixin
 ) {
   // Data
-  planets = ''
+  starships = ''
+  speed = []
 
-  @State('planets', { namespace: 'planetsState' })
-  planets
+  @State('starships', { namespace: 'starshipsState' })
+  starships
 
   created() {
     // get data
@@ -106,17 +115,20 @@ export default class TvPlanets extends mixins(
   }
 
   // Methods
-  async retrieveData() {
-    if (isEmpty(this.planets)) {
-      // getPlanetsAPI call (in getDataMixin)
-      await this.getPlanets()
+  retrieveData() {
+    if (isEmpty(this.starships)) {
+      // getStarshipsAPI call
+      this.getStarships()
     }
+
+    // getStarships API call
+    this.getStarships()
   }
 }
 </script>
 
 <style lang="postcss">
-.tv-planets {
+.tv-starships {
   &__button {
     position: absolute;
     bottom: 12px;
@@ -136,7 +148,7 @@ export default class TvPlanets extends mixins(
 
     /* does not work with CSS vars :( */
     @media (min-width: 960px) {
-      min-height: 300px;
+      min-height: 400px;
       max-height: 500px;
       overflow-y: scroll;
     }

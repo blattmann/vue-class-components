@@ -12,18 +12,16 @@
           </h1>
           <div class="tv-person__container">
             <v-row no-gutters>
-              <v-col cols="12" sm="6" md="4">
+              <v-col cols="12" sm="6" md="5">
                 <div
+                  v-if="backgroundImage"
                   :style="{
-                    backgroundImage: `url(${$getImage(
-                      'people',
-                      getImageName(character.name)
-                    )})`
+                    backgroundImage: `url(${backgroundImage})`
                   }"
                   class="tv-person__image"
                 />
               </v-col>
-              <v-col cols="6" md="8">
+              <v-col cols="6" md="7">
                 <div class="ml-5">
                   <p><strong>Birth Year:</strong> {{ character.birth_year }}</p>
                   <p><strong>Eye Color:</strong> {{ character.eye_color }}</p>
@@ -52,19 +50,16 @@
             </h2>
             <div class="tv-person__container">
               <v-row no-gutters>
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="12" sm="6" md="5">
                   <div
+                    v-if="backgroundImageSecond"
                     :style="{
-                      backgroundImage: `url(${$getImage(
-                        'planets',
-                        getImageName(planet.name),
-                        'jpg'
-                      )})`
+                      backgroundImage: `url(${backgroundImageSecond})`
                     }"
                     class="tv-person__image"
                   />
                 </v-col>
-                <v-col cols="6" md="8">
+                <v-col cols="6" md="7">
                   <div class="ml-5">
                     <p><strong>Name:</strong> {{ planet.name }}</p>
                     <p><strong>Terrain:</strong> {{ planet.terrain }}</p>
@@ -142,6 +137,8 @@
 // Core
 import Component, { mixins } from 'vue-class-component'
 
+import { isEmpty, isArray } from 'lodash'
+
 // Vuex
 import { State } from 'vuex-class'
 
@@ -149,14 +146,15 @@ import { State } from 'vuex-class'
 import TvLoading from '@/mixins/loading'
 import TvNavigationHelper from '@/mixins/navigationHelper'
 import TvFindPerson from '@/mixins/findPerson'
+import TvGetBackgroundImageMixin from '@/mixins/getBackgroundImageMixin'
 
 // Component imports
 import TvSpinner from '@/components/spinner/Spinner'
 
 /**
- *  TvPeople
+ *  TvPerson
  *
- *  @desc - SWAPI People Page
+ *  @desc - SWAPI Person Page
  *
  *  @author Front End Dev @Certipath
  *
@@ -171,10 +169,12 @@ import TvSpinner from '@/components/spinner/Spinner'
 export default class TvPerson extends mixins(
   TvLoading,
   TvNavigationHelper,
-  TvFindPerson
+  TvFindPerson,
+  TvGetBackgroundImageMixin
 ) {
   // Data
   person = this.$nuxt.$route.params.person
+  image = this.person // needed for the background image @ `getBackgroundImageMixin`
   species = null
   starships = null
   planet = null
@@ -184,28 +184,49 @@ export default class TvPerson extends mixins(
   people
 
   created() {
-    this.$store.commit('appState/setloading', false)
+    this.$store.commit('appState/setloading', true)
     this.getdata()
+
+    if (this.image) {
+      this.getBackgroundImage('people', this.image, 'png')
+    }
   }
 
-  // get person data
+  // Methods
   async getdata() {
     // we receive the main person data through the store through `TvFindPerson` mixin
 
-    // get species info
-    const { name: species } = await this.$nuxt.$api.get(this.character.species)
-    this.species = await species
+    // if the store is empty we return to the people page
+    if (isEmpty(this.people) || !isArray(this.people)) {
+      // return to people page
+      this.$router.push({ name: 'people' })
+    }
 
-    // get starship info
-    const starships = []
-    this.character.starships.forEach(async val =>
-      starships.push(await this.$nuxt.$api.get(val))
-    )
-    this.starships = await starships
+    if (!isEmpty(this.people)) {
+      // get species info
+      const { name: species } = await this.$nuxt.$api.get(
+        this.character.species
+      )
+      this.species = await species
 
-    // get planet info
-    const planet = await this.$nuxt.$api.get(this.character.homeworld)
-    this.planet = await planet
+      // get planet info
+      const planet = await this.$nuxt.$api.get(this.character.homeworld)
+      this.planet = await planet
+
+      if (planet) {
+        console.log('planet.name: ', planet.name)
+        this.getBackgroundImage('planets', planet.name, 'jpg', 'second')
+      }
+
+      // get starship info
+      const starships = []
+      this.character.starships.forEach(async val =>
+        starships.push(await this.$nuxt.$api.get(val))
+      )
+      this.starships = starships
+    }
+
+    this.$store.commit('appState/setloading', false)
   }
 
   getImageName(name) {
@@ -244,8 +265,9 @@ export default class TvPerson extends mixins(
 
   &__image {
     width: 100%;
-    height: 50vh;
+    height: 100%;
     background-repeat: no-repeat !important;
+    background-size: cover;
   }
 }
 </style>

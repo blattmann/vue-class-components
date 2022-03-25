@@ -14,22 +14,53 @@ import { Module, Mutation, VuexModule } from 'vuex-module-decorators'
   name: 'starshipsState'
 })
 export default class StarshipsModule extends VuexModule {
-  @Mutation
-  init(data) {
-    this.starships = data
-  }
+  // ============================================
+  // starships
 
-  @Mutation
-  reset() {
-    this.starships = { ...this.starshipsInitialState }
-  }
-
+  /*
+   * @name - setPeople
+   * @descrition - Set initial starships state
+   */
   @Mutation
   setStarships(data) {
     this.starships = data
   }
 
+  // ============================================
+  // starship
+
+  /*
+   * @name - setStarship
+   * @descrition - Set current starship
+   */
+  @Mutation
+  setStarship(starship) {
+    this.selectedStarshipState = starship
+  }
+
+  /*
+   * @name - clearStarship
+   * @descrition - Clear starship
+   */
+  @Mutation
+  clearStarship() {
+    this.selectedStarshipState = {}
+  }
+
+  // ============================================
+  // states
+
+  /*
+   * @name - starshipsInitialState
+   * @descrition - Initial state of the starships object
+   */
   starshipsInitialState = {}
+
+  /*
+   * @name - selectedStarshipState
+   * @descrition - State of the currently selected starship
+   */
+  selectedStarshipState = {}
 
   starships = { ...this.starshipsInitialState }
 }

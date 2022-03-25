@@ -2,6 +2,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { isEmpty } from 'lodash'
+
 // Vuex
 import { State } from 'vuex-class'
 
@@ -26,12 +28,14 @@ export default class TvFindPerson extends Vue {
   }
 
   findPerson() {
-    const personObject = this.people.filter(obj => obj.name === this.person)
+    if (!isEmpty(this.people)) {
+      const personObject = this.people.filter(obj => obj.name === this.person)
 
-    // clone the result to make it mutable
-    this.character = { ...personObject[0] }
+      // clone the result to make it mutable
+      this.character = { ...personObject[0] }
 
-    // safe the result in the store
-    this.$store.commit('peopleState/setPerson', personObject[0])
+      // safe the result in the store
+      this.$store.commit('peopleState/setPerson', personObject[0])
+    }
   }
 }

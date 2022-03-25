@@ -69,9 +69,9 @@ export default class TvNavigation extends Vue {
 
 <style lang="postcss">
 :root {
-  --hover-border-color: #ea215a;
-  --hover-border-width: 2px;
-  --hover-bottom-distance: 0px;
+  --navigation-hover-border-color: #ea215a;
+  --navigation-hover-border-width: 2px;
+  --navigation-hover-bottom-distance: 0px;
   --background-color: rgba(255, 255, 255, 1);
 }
 
@@ -105,22 +105,22 @@ export default class TvNavigation extends Vue {
     text-decoration: none;
     display: inline-block;
     background-image: linear-gradient(
-      var(--hover-border-color),
-      var(--hover-border-color)
+      var(--navigation-hover-border-color),
+      var(--navigation-hover-border-color)
     );
-    background-size: 0% var(--hover-border-width);
+    background-size: 0% var(--navigation-hover-border-width);
     background-repeat: no-repeat;
     transition: background-size 0.3s;
     margin: 5px 0;
 
     &:hover {
       text-decoration: none;
-      background-size: 100% var(--hover-border-width);
+      background-size: 100% var(--navigation-hover-border-width);
     }
 
     &--active {
       text-decoration: none;
-      background-size: 100% var(--hover-border-width);
+      background-size: 100% var(--navigation-hover-border-width);
       pointer-events: none;
     }
   }
@@ -128,14 +128,14 @@ export default class TvNavigation extends Vue {
 
 /* Hover FX */
 .hoverFromCenter {
-  background-position: 50% calc(100% - var(--hover-bottom-distance));
+  background-position: 50% calc(100% - var(--navigation-hover-bottom-distance));
 }
 
 .hoverFromLeft {
-  background-position: 0 calc(100% - var(--hover-bottom-distance));
+  background-position: 0 calc(100% - var(--navigation-hover-bottom-distance));
 }
 
 .hoverFromRight {
-  background-position: 100% calc(100% - var(--hover-bottom-distance));
+  background-position: 100% calc(100% - var(--navigation-hover-bottom-distance));
 }
 </style>

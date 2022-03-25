@@ -2,13 +2,13 @@
   <div>
     <h1>People</h1>
     <v-container class="tv-people text-center">
-      <v-row class="fill-height" align="center" justify="left">
+      <v-row class="fill-height" align="center">
         <template v-for="item in people">
-          <v-col :key="item.name" cols="12" md="4" class="pa-0 pb-6 pa-md-6">
+          <v-col :key="item.name" cols="12" md="6" class="pa-0 pb-6 pa-md-6">
             <v-hover v-slot="{ hover }">
               <v-card
                 :elevation="hover ? 12 : 2"
-                :class="{ 'on-hover': hover }"
+                :class="['tv-people__card', { 'on-hover': hover }]"
               >
                 <v-card-title class="text-h6">
                   <v-row
@@ -88,6 +88,7 @@ import { State } from 'vuex-class'
 // Mixins
 import TvLoading from '@/mixins/loading'
 import TvNavigationHelper from '@/mixins/navigationHelper'
+import getDataMixin from '@/mixins/getDataMixin'
 
 // Component imports
 import TvEditPerson from '@/components/dialog/editPerson.vue'
@@ -109,9 +110,12 @@ import TvSpinner from '@/components/spinner/Spinner'
     TvEditPerson
   }
 })
-export default class TvPeople extends mixins(TvLoading, TvNavigationHelper) {
+export default class TvPeople extends mixins(
+  TvLoading,
+  TvNavigationHelper,
+  getDataMixin
+) {
   // Data
-  apiCount = 0
   dialog = false
   person = ''
 
@@ -132,67 +136,14 @@ export default class TvPeople extends mixins(TvLoading, TvNavigationHelper) {
   }
 
   // Methods
-  async retrieveData() {
+  retrieveData() {
     if (isEmpty(this.people)) {
-      // getPeople API call
-      await this.getPeople()
-    }
-
-    // getStarships API call
-    await this.getStarships()
-
-    // getPlanets API call
-    await this.getPlanets()
-  }
-
-  getPeople() {
-    this.$api.getPeople().then(response => {
-      if (response) {
-        this.hideSpinner()
-        const people = response.results
-        // Store the response
-        this.$store.commit('peopleState/setPeople', people)
-      } else {
-        console.warn('No people data available.')
-      }
-    })
-  }
-
-  getStarships() {
-    this.$api.getStarships().then(response => {
-      if (response) {
-        this.hideSpinner()
-        const starships = response.results
-        // Store the response
-        this.$store.commit('starshipsState/setStarships', starships)
-      } else {
-        console.warn('No starship data available.')
-      }
-    })
-  }
-
-  getPlanets() {
-    this.$api.getPlanets().then(response => {
-      if (response) {
-        this.hideSpinner()
-        const planets = response.results
-        // Store the response
-        this.$store.commit('planetsState/setPlanets', planets)
-      } else {
-        console.warn('No planets data available.')
-      }
-    })
-  }
-
-  hideSpinner() {
-    this.apiCount += 1
-    if (this.apiCount === 3) {
-      this.$store.commit('appState/setloading', false)
+      // getPeople API call (in getDataMixin)
+      this.getPeople()
     }
   }
 
   editItem(item) {
-    console.log(item)
     this.dialog = true
     this.person = item
   }
@@ -209,6 +160,25 @@ export default class TvPeople extends mixins(TvLoading, TvNavigationHelper) {
     position: absolute;
     bottom: 12px;
     right: 24px;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+
+    /* unfortunately, I cannot get mixins to work */
+    /* @mixin res-lg {
+      min-height: 500px;
+      max-height: 500px;
+      overflow-y: scroll;
+    } */
+
+    /* does not work with CSS vars :( */
+    @media (min-width: 960px) {
+      min-height: 250px;
+      max-height: 500px;
+      overflow-y: scroll;
+    }
   }
 
   .v-card {

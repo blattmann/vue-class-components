@@ -1,0 +1,12 @@
+:root {
+  --navigation-hover-border-color: #ea215a;
+  --navigation-hover-border-width: 2px;
+  --navigation-hover-bottom-distance: 0px;
+  --background-color: rgba(255, 255, 255, 1);
+}
+
+/*
+CSS vars cannot be used global in Nuxt
+
+-->https: //github.com/nuxt/nuxt.js/issues/2150 "You can not use CSS variables loaded from a style sheet can not be used in components."
+*/
