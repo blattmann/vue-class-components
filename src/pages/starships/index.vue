@@ -23,13 +23,13 @@
 
                     <v-col cols="12">
                       <v-row no-gutters>
-                        <v-col cols="4">
+                        <v-col cols="4" md="3">
                           <tv-image
                             :image-name="item.name"
                             folder="starships"
                           />
                         </v-col>
-                        <v-col cols="8">
+                        <v-col cols="8" md="5">
                           <p
                             class="ml-3 text-body-1 font-weight-bold text-left"
                           >
