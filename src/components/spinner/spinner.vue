@@ -20,14 +20,7 @@ import Component from 'vue-class-component'
  *  Mon Mar 10 09:00:00 MST 2022
  */
 @Component({})
-export default class TvSpinner extends Vue {
-  // Component data
-  // hoverFx = 'Center' // Left, Right, Center
-  // Computed property
-  // getActiveItem() {
-  //   return this.$nuxt.$route.path
-  // }
-}
+export default class TvSpinner extends Vue {}
 </script>
 
 <style lang="postcss">

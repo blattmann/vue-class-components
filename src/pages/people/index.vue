@@ -23,6 +23,9 @@
 
                     <v-col cols="12">
                       <v-row no-gutters>
+                        <v-col cols="4">
+                          <tv-image :image-name="item.name" folder="people" />
+                        </v-col>
                         <v-col cols="8">
                           <p
                             class="ml-3 text-body-1 font-weight-bold text-left"
@@ -88,11 +91,12 @@ import { State } from 'vuex-class'
 // Mixins
 import TvLoading from '@/mixins/loading'
 import TvNavigationHelper from '@/mixins/navigationHelper'
-import getDataMixin from '@/mixins/getDataMixin'
+import TVGetDataMixin from '@/mixins/getDataMixin'
 
 // Component imports
 import TvEditPerson from '@/components/dialog/editPerson.vue'
 import TvSpinner from '@/components/spinner/Spinner'
+import TvImage from '@/components/image/Image'
 
 /**
  *  TvPeople
@@ -107,13 +111,14 @@ import TvSpinner from '@/components/spinner/Spinner'
   layout: 'default',
   components: {
     TvSpinner,
-    TvEditPerson
+    TvEditPerson,
+    TvImage
   }
 })
 export default class TvPeople extends mixins(
   TvLoading,
   TvNavigationHelper,
-  getDataMixin
+  TVGetDataMixin
 ) {
   // Data
   dialog = false
@@ -173,6 +178,15 @@ export default class TvPeople extends mixins(
     }
   }
 
+  &__dialog {
+    background-color: #fff;
+
+    .v-card {
+      width: 100%;
+      box-shadow: none;
+    }
+  }
+
   .v-card {
     transition: opacity 0.4s ease-in-out;
 
@@ -181,13 +195,8 @@ export default class TvPeople extends mixins(
     }
   }
 
-  &__dialog {
-    background-color: #fff;
-
-    .v-card {
-      width: 100%;
-      box-shadow: none;
-    }
+  .v-image {
+    max-width: 50%;
   }
 }
 </style>

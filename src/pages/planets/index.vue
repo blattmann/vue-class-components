@@ -23,6 +23,9 @@
 
                     <v-col cols="12">
                       <v-row no-gutters>
+                        <v-col cols="4">
+                          <tv-image :image-name="item.name" folder="planets" />
+                        </v-col>
                         <v-col cols="8">
                           <p
                             class="ml-3 text-body-1 font-weight-bold text-left"
@@ -69,10 +72,11 @@ import { State } from 'vuex-class'
 // Mixins
 import TvLoading from '@/mixins/loading'
 import TvNavigationHelper from '@/mixins/navigationHelper'
-import getDataMixin from '@/mixins/getDataMixin'
+import TVGetDataMixin from '@/mixins/getDataMixin'
 
 // Component imports
 import TvSpinner from '@/components/spinner/Spinner'
+import TvImage from '@/components/image/Image'
 
 /**
  *  TvPlanets
@@ -86,13 +90,14 @@ import TvSpinner from '@/components/spinner/Spinner'
 @Component({
   layout: 'default',
   components: {
-    TvSpinner
+    TvSpinner,
+    TvImage
   }
 })
 export default class TvPlanets extends mixins(
   TvLoading,
   TvNavigationHelper,
-  getDataMixin
+  TVGetDataMixin
 ) {
   // Data
   planets = ''
