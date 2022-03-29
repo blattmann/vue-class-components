@@ -1,3 +1,11 @@
+/**
+ *  @name - api
+ *
+ *  @desc - fires call to the API
+ *
+ *  @author - Front End Dev @Certipath
+ *
+ */
 import { api as httpApi } from '../composables/api'
 
 export default function({ config }, inject) {

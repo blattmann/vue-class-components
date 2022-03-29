@@ -1,3 +1,4 @@
 /* Globals */
 @import './vars.css';
-@import './mediaqueries.css';
+@import './mixins/mediaqueries.css';
+@import './globals.css';

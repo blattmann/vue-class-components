@@ -106,10 +106,10 @@ export default class TvPlanets extends mixins(
   }
 
   // Methods
-  async retrieveData() {
+  retrieveData() {
     if (isEmpty(this.planets)) {
       // getPlanetsAPI call (in getDataMixin)
-      await this.getPlanets()
+      this.getPlanets()
     }
   }
 }
@@ -127,15 +127,7 @@ export default class TvPlanets extends mixins(
     display: flex;
     flex-direction: column;
 
-    /* unfortunately, I cannot get mixins to work */
-    /* @mixin res-lg {
-      min-height: 500px;
-      max-height: 500px;
-      overflow-y: scroll;
-    } */
-
-    /* does not work with CSS vars :( */
-    @media (min-width: 960px) {
+    @mixin res-lg {
       min-height: 300px;
       max-height: 500px;
       overflow-y: scroll;

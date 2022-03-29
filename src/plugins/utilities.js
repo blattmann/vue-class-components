@@ -1,3 +1,14 @@
+/**
+ *  @name - utilities
+ *
+ *  @desc - globals helper functions.
+ * Can be used globally by adding a `$` in front of the
+ * function name, e.g. `$getImageName(image), 'jpg')`
+ *
+ *  @author - Front End Dev @Certipath
+ *
+ */
+
 export default function({ config }, inject) {
   const randNum = (min, max) => Math.floor(Math.random() * (+max - +min)) + +min
   const assetImage = (directory, min, max, format = 'png') =>

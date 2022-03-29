@@ -1,6 +1,9 @@
 const prodCSS =
   process.env.NODE_ENV === 'production' ? ['~/assets/css/styles.css'] : []
 
+// eslint-disable-next-line nuxt/no-cjs-in-config
+const path = require('path')
+
 export default {
   ignore: ['**/*.spec.*', 'src/__tests__/*.js'],
   srcDir: 'src/',
@@ -123,31 +126,24 @@ export default {
     extractCSS: true,
     postcss: {
       plugins: {
-        'postcss-custom-media': {},
+        'postcss-custom-media': {
+          importFrom: 'src/assets/css/media_vars.css'
+        },
         'postcss-media-minmax': {},
         'postcss-import': {},
         'postcss-apply': {},
         'postcss-functions': {},
-        // imports seem not to work :(
-        // 'postcss-custom-properties': {
-        //   importFrom: [
-        //     './src/assets/css/vars.css',
-        //     './src/assets/css/mediaqueries.css'
-        //   ],
-        //   preserve: false
-        // },
-        // 'postcss-mixins': {
-        //   importFrom: ['./src/assets/css/mediaqueries.css']
-        // },
         'postcss-custom-properties': {},
-        'postcss-mixins': {},
         'postcss-nested': {},
+        'postcss-mixins': {
+          mixinsDir: path.join(__dirname, '/src/assets/css/mixins')
+        },
         'postcss-discard-comments': {},
         'postcss-clean': {},
         'postcss-preset-env': { stage: 1 },
         'postcss-flexbugs-fixes': {},
-        "autoprefixer": {},
-        "cssnano": {}
+        autoprefixer: {},
+        cssnano: {}
       },
       order: [
         'postcss-custom-media',
@@ -165,7 +161,6 @@ export default {
         'autoprefixer',
         'cssnano'
       ],
-
       preset: {
         stage: 1,
         autoprefixer: {

@@ -4,7 +4,7 @@ import Component from 'vue-class-component'
 
 /*
  * @name - TvGetDataMixin
- * @descrition - Handles the major API calls
+ * @descrition - Handles the API calls
  */
 @Component
 export default class TvGetDataMixin extends Vue {

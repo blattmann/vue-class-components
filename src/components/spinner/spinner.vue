@@ -31,13 +31,6 @@ export default class TvSpinner extends Vue {
 </script>
 
 <style lang="postcss">
-:root {
-  --spinner-speed-show: 0ms;
-  --spinner-speed-animation: 500ms;
-  --spinner-border-radius: 50%;
-  --spinner-background-color: rgba(255, 255, 255, 1);
-}
-
 .tv-spinner {
   background: var(--spinner-background-color);
   visibility: hidden;

@@ -17,7 +17,10 @@
                   :style="{
                     backgroundImage: `url(${backgroundImage})`
                   }"
-                  class="tv-starship__image"
+                  :class="[
+                    'tv-starship__image',
+                    { 'tv-starship__image--placeholder': placeholderFirst }
+                  ]"
                 />
               </v-col>
               <v-col cols="6" md="7">
@@ -115,7 +118,7 @@ export default class TvStarship extends mixins(
   starships
 
   created() {
-    this.$store.commit('appState/setloading', false)
+    this.$store.commit('appState/setloading', true)
 
     // if the store is empty we return to the people page
     if (isEmpty(this.starships) || !isArray(this.starships)) {
@@ -124,21 +127,18 @@ export default class TvStarship extends mixins(
     }
 
     if (this.image) {
-      this.getBackgroundImage('starships', this.image, 'png')
+      this.getBackgroundImage('starships', this.image, 'jpg')
     }
 
-    // TODO:
+    this.$store.commit('appState/setloading', false)
+
+    // TODO (addidtional):
     // Iterate over pilots & films
   }
 }
 </script>
 
 <style lang="postcss">
-:root {
-  --border-radius: 4px;
-  --background-color-transparent: rgba(255, 255, 255, 0.8);
-}
-
 .tv-starship {
   &__wrapper {
     background-color: var(--background-color-transparent);
@@ -148,9 +148,14 @@ export default class TvStarship extends mixins(
 
   &__image {
     width: 100%;
-    height: 100%;
+    height: 50%;
     background-repeat: no-repeat !important;
     background-size: cover;
+
+    &--placeholder {
+      height: 80%;
+      background-position-x: -10px;
+    }
   }
 }
 </style>

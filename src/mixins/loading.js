@@ -9,10 +9,10 @@ import { State } from 'vuex-class'
 @Component
 export default class TvLoading extends Vue {
   /*
-   * @name - loading
+   * @name - TvLoading
    * @descrition - Binds to the loading in the appState
    * @decorator - @State
-   * @type - Sate<T>
+   * @type - State<T>
    * @param - namespace: string - appState
    */
   @State('loading', { namespace: 'appState' })

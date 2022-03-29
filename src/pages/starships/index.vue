@@ -139,15 +139,7 @@ export default class TvStarships extends mixins(
     display: flex;
     flex-direction: column;
 
-    /* unfortunately, I cannot get mixins to work */
-    /* @mixin res-lg {
-      min-height: 500px;
-      max-height: 500px;
-      overflow-y: scroll;
-    } */
-
-    /* does not work with CSS vars :( */
-    @media (min-width: 960px) {
+    @mixin res-lg {
       min-height: 400px;
       max-height: 500px;
       overflow-y: scroll;

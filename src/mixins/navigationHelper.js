@@ -9,7 +9,7 @@ export default class TvNavigationHelper extends Vue {
    * @name - TvNavigationHelper
    * @descrition - Binds to the current page in the navigationState
    * @decorator - @State
-   * @type - Sate<T>
+   * @type - State<T>
    * @param - namespace: string - navigationState
    */
 

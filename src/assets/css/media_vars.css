@@ -1,0 +1,21 @@
+/**
+ *  Media query variables
+ *
+ *  @author Front End Dev @WKS
+ *
+ *  xs     0 - 480
+ *  sm   481 - 767
+ *  md   768 - 959
+ *  lg   960 - 1439
+ *  xl  1440 - 1919
+ *  xxl 1920 ++
+ *
+ *  Mon Mar 28 10:15:00 PCT 2022
+ */
+
+@custom-media --screen-xs-min (min-width: 0px);
+@custom-media --screen-sm-min (min-width: 480px);
+@custom-media --screen-md-min (min-width: 768px);
+@custom-media --screen-lg-min (min-width: 960px);
+@custom-media --screen-xl-min (min-width: 1440px);
+@custom-media --screen-xxl-min (min-width: 1920px);

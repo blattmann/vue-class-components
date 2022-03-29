@@ -1,24 +1,8 @@
 // Vuex
 import { Module, Mutation, VuexModule } from 'vuex-module-decorators'
+import { swapiNavi } from '@/composables/navigation'
 
-const navigationArray = [
-  {
-    title: 'Home',
-    url: '/'
-  },
-  {
-    title: 'People',
-    url: '/people'
-  },
-  {
-    title: 'Planets',
-    url: '/planets'
-  },
-  {
-    title: 'Starships',
-    url: '/starships'
-  }
-]
+const navigationArray = swapiNavi()
 
 /**
  *  @desc -

@@ -1,0 +1,55 @@
+/**
+ *  Media query mixin
+ *
+ *  @author Front End Dev @WKS
+ *
+ *  Hint:
+ * `color: inherit;` is used as a hack to enable the nested content.
+ * If it is removed the nested content will not be rendered.
+ *
+ *  Mon Mar 28 10:15:00 PCT 2022
+ */
+/**/
+
+/* mobile first :D */
+@define-mixin res-xs {
+  @media (--screen-xs-min) {
+    color: inherit;
+    @mixin-content;
+  }
+}
+
+@define-mixin res-sm {
+  @media (--screen-sm-min) {
+    color: inherit;
+    @mixin-content;
+  }
+}
+
+@define-mixin res-md {
+  @media (--screen-md-min) {
+    color: inherit;
+    @mixin-content;
+  }
+}
+
+@define-mixin res-lg {
+  @media (--screen-lg-min) {
+    color: inherit;
+    @mixin-content;
+  }
+}
+
+@define-mixin res-xl {
+  @media (--screen-xl-min) {
+    color: inherit;
+    @mixin-content;
+  }
+}
+
+@define-mixin res-xxl {
+  @media (--screen-xxl-min) {
+    color: inherit;
+    @mixin-content;
+  }
+}

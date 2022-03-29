@@ -29,6 +29,7 @@
     <!-- End Home Page Link -->
   </v-container>
 </template>
+
 <script>
 // Core
 import Vue from 'vue'

@@ -68,13 +68,6 @@ export default class TvIndex extends mixins(TvNavigationHelper) {}
 </script>
 
 <style lang="postcss">
-:root {
-  --background-color: rgba(255, 255, 255, 1);
-  --border-radius: 4px;
-  --text-color-default: #000;
-  --text-size-content: 1.2rem;
-}
-
 .tv-home {
   &__wrapper {
     background-color: var(--background-color);

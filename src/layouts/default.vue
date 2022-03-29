@@ -1,5 +1,7 @@
 <template>
   <v-app role="application">
+    <div class="tv-stars"></div>
+    <div class="tv-twinkling"></div>
     <tv-navigation />
     <template v-if="loading">
       <tv-spinner />
@@ -9,8 +11,19 @@
 
     <template>
       <v-footer padless class="tv-footer">
-        <v-col class="text-center" cols="12">
-          {{ new Date().getFullYear() }} — <strong>Stefan Blatmann</strong>
+        <v-col cols="12">
+          <v-row>
+            <v-col cols="4">
+              created {{ new Date().getFullYear() }} by
+              <strong>Stefan Blatmann</strong>
+            </v-col>
+            <v-col cols="8" class="text-right">
+              Star Wars and all associated names and/or images are copyright
+              Lucasfilm Ltd. Images were freely collected from
+              <a href="http://starwars.wikia.com/wiki/Main_Page">Wookiepedia</a
+              >.
+            </v-col>
+          </v-row>
         </v-col>
       </v-footer>
     </template>
@@ -64,20 +77,3 @@ export default class TvDefaultLayout extends mixins(TvLoading) {
   }
 }
 </script>
-
-<style lang="postcss">
-.tv-container {
-  background: url('~/assets/images/background.jpg') no-repeat center center
-    fixed;
-  background-size: cover;
-}
-
-.tv-divider {
-  padding: 8px 0;
-}
-
-.tv-footer {
-  position: sticky;
-  bottom: 0;
-}
-</style>

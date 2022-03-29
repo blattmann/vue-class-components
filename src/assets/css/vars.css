@@ -1,12 +1,28 @@
+/**
+ *  CSS variables
+ *
+ *  @author Front End Dev @WKS
+ *
+ *  Mon Mar 28 10:15:00 PCT 2022
+ */
+/**/
+
 :root {
   --navigation-hover-border-color: #ea215a;
   --navigation-hover-border-width: 2px;
   --navigation-hover-bottom-distance: 0px;
+
+  --spinner-speed-show: 0ms;
+  --spinner-speed-animation: 500ms;
+  --spinner-border-radius: 50%;
+  --spinner-background-color: rgba(255, 255, 255, 1);
+
   --background-color: rgba(255, 255, 255, 1);
+  --background-color-default: rgba(0, 0, 0, 1);
+  --background-color-transparent: rgba(255, 255, 255, 0.8);
+
+  --border-radius: 4px;
+
+  --text-color-default: #000;
+  --text-size-content: 1.2rem;
 }
-
-/*
-CSS vars cannot be used global in Nuxt
-
--->https: //github.com/nuxt/nuxt.js/issues/2150 "You can not use CSS variables loaded from a style sheet can not be used in components."
-*/

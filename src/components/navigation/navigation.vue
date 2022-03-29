@@ -68,13 +68,6 @@ export default class TvNavigation extends Vue {
 </script>
 
 <style lang="postcss">
-:root {
-  --navigation-hover-border-color: #ea215a;
-  --navigation-hover-border-width: 2px;
-  --navigation-hover-bottom-distance: 0px;
-  --background-color: rgba(255, 255, 255, 1);
-}
-
 .tv-navigation {
   &__wrapper {
     padding: 20px;

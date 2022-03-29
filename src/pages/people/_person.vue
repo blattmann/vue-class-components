@@ -18,7 +18,10 @@
                   :style="{
                     backgroundImage: `url(${backgroundImage})`
                   }"
-                  class="tv-person__image"
+                  :class="[
+                    'tv-person__image',
+                    { 'tv-person__image--placeholder': placeholderFirst }
+                  ]"
                 />
               </v-col>
               <v-col cols="6" md="7">
@@ -56,7 +59,10 @@
                     :style="{
                       backgroundImage: `url(${backgroundImageSecond})`
                     }"
-                    class="tv-person__image"
+                    :class="[
+                      'tv-person__image',
+                      { 'tv-person__image--placeholder': placeholderFirst }
+                    ]"
                   />
                 </v-col>
                 <v-col cols="6" md="7">
@@ -109,10 +115,16 @@
                       <p class="tv-person__starships--name text-h4">
                         Type: {{ item.starship_class }}
                       </p>
-                      <p>
+                      <p v-if="item.name">
                         <img
                           :alt="item.name"
-                          :src="$assetImage('starships', (i += 1), 2)"
+                          :src="
+                            $getImage(
+                              'starships',
+                              $getImageName(item.name),
+                              'jpg'
+                            )
+                          "
                           class="tv-person__starships--image"
                         />
                       </p>
@@ -188,7 +200,7 @@ export default class TvPerson extends mixins(
     this.getdata()
 
     if (this.image) {
-      this.getBackgroundImage('people', this.image, 'png')
+      this.getBackgroundImage('people', this.image, 'jpg')
     }
   }
 
@@ -214,7 +226,6 @@ export default class TvPerson extends mixins(
       this.planet = await planet
 
       if (planet) {
-        console.log('planet.name: ', planet.name)
         this.getBackgroundImage('planets', planet.name, 'jpg', 'second')
       }
 
@@ -238,11 +249,6 @@ export default class TvPerson extends mixins(
 </script>
 
 <style lang="postcss">
-:root {
-  --border-radius: 4px;
-  --background-color-transparent: rgba(255, 255, 255, 0.8);
-}
-
 .tv-person {
   &__wrapper {
     background-color: var(--background-color-transparent);
@@ -268,6 +274,11 @@ export default class TvPerson extends mixins(
     height: 100%;
     background-repeat: no-repeat !important;
     background-size: cover;
+
+    &--placeholder {
+      height: 80%;
+      background-position-x: -10px;
+    }
   }
 }
 </style>
