@@ -1,6 +1,7 @@
-# Kiosk.Vue
+# Vue Class Components
 
-> Kiosk app for TrustVisitor
+> Vue class components demo with Vuex class components using the SWAPI API.
+> Built with Nuxt
 
 ## Build Setup
 
